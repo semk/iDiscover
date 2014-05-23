@@ -32,12 +32,15 @@ class ARP(object):
             # do a ping for an ARP table update
             self.ping(ip_address)
 
-        pid = Popen(self.__arp_command_prefix + [ip_address], stdout=PIPE)
-        out = pid.communicate()[0]
-        mac_found = self.MAC_RE.search(out)
-        if mac_found:
-            mac = mac_found.group(0)
-            return mac
+        try:
+            pid = Popen(self.__arp_command_prefix + [ip_address], stdout=PIPE)
+            out = pid.communicate()[0]
+            mac_found = self.MAC_RE.search(out)
+            if mac_found:
+                mac = mac_found.group(0)
+                return mac
+        finally:
+            pid.stdout.close()
 
     @staticmethod
     def ping(ip_address):
@@ -45,6 +48,7 @@ class ARP(object):
         """
         # do a single ping
         pid = Popen(['ping', '-c', '1', ip_address], stdout=PIPE)
+        pid.stdout.close()
 
 
 if __name__ == '__main__':

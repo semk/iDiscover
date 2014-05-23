@@ -8,6 +8,7 @@
 import arp
 import oui
 import ipcalc
+import sys
 
 
 class Discovery(object):
@@ -35,13 +36,20 @@ class Discovery(object):
 
 
 def run():
-    pass
+    if len(sys.argv) < 2:
+        print
+        print 'Usage:\t\tidiscover <ip-address/cidr>'
+        print 'Examples:'
+        print '\t\tidiscover 10.73.19.0'
+        print '\t\tidiscover 10.74.215/24'
+        print
+    else:
+        addrs = sys.argv[1:]
+        d = Discovery()
+        for addr in addrs:
+            for ip, manuf in d.discover(addr):
+                print 'IP Address: {ip} Manufacturer: {manuf}'.format(ip=ip, manuf=manuf)
 
 
 if __name__ == '__main__':
-    d = Discovery()
-    for ip, manuf in d.discover('10.73.19.0/24'):
-        print ip, manuf
-
-    for ip, manuf in d.discover('10.74.215.0/24'):
-        print ip, manuf
+    run()
