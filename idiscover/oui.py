@@ -11,15 +11,28 @@ import os
 import re
 
 
+def get_oui_path():
+    """
+    Return the OUI file path.
+    """
+    paths = [
+        os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            'data/oui.txt'),
+        '/opt/idiscover/oui.txt'
+    ]
+    for path in paths:
+        if os.path.exists(path):
+            return path
+
+
 class OUI(object):
     """ The OUI database
     """
 
     __shared_state = {}
 
-    oui_file = os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        'data/oui.txt')
+    oui_file = get_oui_path()
 
     hex_manuf_pattern = re.compile('\s+(?P<hex>\S+)\s+(\(hex\)|\(base 16\))\s+(?P<manuf>.*)')
 
