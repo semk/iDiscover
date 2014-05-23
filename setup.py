@@ -27,7 +27,7 @@ setup(
     download_url='https://github.com/semk/iDiscover/tarball/master',
     install_requires=['ipcalc >= 1.1.2'],
     packages=find_packages(),
-    data_files=['data/oui.txt'],
+    data_files=[('data/oui.txt', ['data/oui.txt'])],
     include_package_data=True,
     entry_points={
         'console_scripts': ['idiscover = idiscover.discover:run']
