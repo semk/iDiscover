@@ -1,7 +1,8 @@
 iDiscover
 =========
 
-Discover the devices (IP address &amp; Manufacturer information) in a (sub)network
+A network discovery tool that fetches the manufacturer and IP information of
+various connected devices in a network.
 
 
 Installation
