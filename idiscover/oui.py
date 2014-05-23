@@ -9,21 +9,14 @@
 
 import os
 import re
+from pkg_resources import resource_filename
 
 
 def get_oui_path():
     """
     Return the OUI file path.
     """
-    paths = [
-        os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-            'data/oui.txt'),
-        '/opt/idiscover/oui.txt'
-    ]
-    for path in paths:
-        if os.path.exists(path):
-            return path
+    return resource_filename(__name__, 'data/oui.txt')
 
 
 class OUI(object):
