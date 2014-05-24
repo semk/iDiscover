@@ -46,9 +46,13 @@ def run():
     else:
         addrs = sys.argv[1:]
         d = Discovery()
-        for addr in addrs:
-            for ip, manuf in d.discover(addr):
-                print 'IP Address: {ip} Manufacturer: {manuf}'.format(ip=ip, manuf=manuf)
+
+        try:
+            for addr in addrs:
+                for ip, manuf in d.discover(addr):
+                    print 'IP Address: {ip} Manufacturer: {manuf}'.format(ip=ip, manuf=manuf)
+        except KeyboardInterrupt:
+            print 'Exiting...'
 
 
 if __name__ == '__main__':

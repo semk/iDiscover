@@ -48,6 +48,7 @@ class ARP(object):
         """
         # do a single ping
         pid = Popen(['ping', '-c', '1', ip_address], stdout=PIPE)
+        # pid.communicate()
         pid.stdout.close()
 
 
