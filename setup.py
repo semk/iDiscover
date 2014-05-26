@@ -16,7 +16,7 @@ def readme(fname):
 
 setup(
     name='idiscover',
-    version='1.0.3',
+    version='1.0.4',
     description='Discover the devices (IP address & Manufacturer information) in a (sub)network',
     long_description=readme('README.md'),
     license='MIT License',
