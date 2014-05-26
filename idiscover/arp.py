@@ -5,11 +5,9 @@
 # @author: Sreejith Kesavan <sreejithemk@gmail.com>
 
 
-
 import re
 import sys
 from subprocess import Popen, PIPE
-
 
 
 class ARP(object):
@@ -32,6 +30,7 @@ class ARP(object):
             # do a ping for an ARP table update
             self.ping(ip_address)
 
+        pid = None
         try:
             pid = Popen(self.__arp_command_prefix + [ip_address], stdout=PIPE)
             out = pid.communicate()[0]
@@ -40,7 +39,8 @@ class ARP(object):
                 mac = mac_found.group(0)
                 return mac
         finally:
-            pid.stdout.close()
+            if pid:
+                pid.stdout.close()
 
     @staticmethod
     def ping(ip_address):
@@ -53,8 +53,10 @@ class ARP(object):
 
         # do a single ping
         pid = Popen(['ping', tries_option, '1', ip_address], stdout=PIPE)
-        # pid.communicate()
+        pid.communicate()
         pid.stdout.close()
+        if pid.returncode != 0:
+            print '{ip} is unreachable'.format(ip=ip_address)
 
 
 if __name__ == '__main__':

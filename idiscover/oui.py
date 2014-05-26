@@ -7,7 +7,6 @@
 # @author: Sreejith Kesavan <sreejithemk@gmail.com>
 
 
-import os
 import re
 from pkg_resources import resource_filename
 

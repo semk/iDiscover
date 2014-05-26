@@ -22,9 +22,18 @@ class Discovery(object):
         self.__arp = arp.ARP()
         self.__oui = oui.OUI()
 
-    def discover(self, network):
-        for ip in ipcalc.Network(network):
+    def discover(self, address):
+        """
+        Traverse the IP subnets and return manufacturer info.
+        """
+        network = ipcalc.Network(address)
+        for ip in network:
             ip = str(ip)
+            # Ignore broadcast IP Addresses
+            if '/' in address and ip == str(network.broadcast()):
+                print 'Ignoring broadcast ip: {broadcast}'.format(broadcast=str(network.broadcast()))
+                continue
+
             mac = self.__arp.find_mac(ip)
             if mac:
                 if len(mac.split(':')[0]) == 1:
