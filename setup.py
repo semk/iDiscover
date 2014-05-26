@@ -26,7 +26,7 @@ setup(
     url='https://github.com/semk/iDiscover',
     download_url='https://github.com/semk/iDiscover/tarball/master',
     install_requires=['ipcalc >= 1.1.2'],
-    packages=find_packages(),
+    packages=find_packages(exclude=['ez_setup']),
     package_data={
         'idiscover': ['data/*.txt'],
     },
