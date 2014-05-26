@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Find out the MAC Adress of the target host using arp
+# Find out the MAC Address of the target host using arp
 #
 # @author: Sreejith Kesavan <sreejithemk@gmail.com>
 
