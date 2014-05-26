@@ -11,10 +11,10 @@ from subprocess import Popen, PIPE
 
 
 class ARP(object):
-    """ Finds the MAC Adresses using ARP
+    """ Finds the MAC Addresses using ARP
 
     NOTE: This finds mac addresses only within the subnet.
-    It doesn't fetch mac addresses for routed network ip's.
+    It doesn't fetch mac addresses for routed network ips.
     """
 
     MAC_RE = re.compile(r'(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})')
