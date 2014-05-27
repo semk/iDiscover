@@ -17,7 +17,7 @@ class ARP(object):
     It doesn't fetch mac addresses for routed network ips.
     """
 
-    MAC_RE = re.compile(r'(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})')
+    MAC_RE = re.compile(r'(([a-f\d]{1,2}[:-]){5}[a-f\d]{1,2})')
 
     def __init__(self):
         if sys.platform == 'win32':
@@ -36,7 +36,7 @@ class ARP(object):
             out = pid.communicate()[0]
             mac_found = self.MAC_RE.search(out)
             if mac_found:
-                mac = mac_found.group(0)
+                mac = mac_found.group(0).replace('-', ':')
                 return mac
         finally:
             if pid:
