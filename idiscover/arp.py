@@ -47,12 +47,12 @@ class ARP(object):
         """ Ping ip_address
         """
         if sys.platform == 'win32':
-            tries_option = '-n'
+            options = ['-n', '1', '-w', '1000']
         else:
-            tries_option = '-c'
+            options = ['-c', '1', '-t', '1']
 
         # do a single ping
-        pid = Popen(['ping', tries_option, '1', ip_address], stdout=PIPE)
+        pid = Popen(['ping'] + options + [ip_address], stdout=PIPE)
         pid.communicate()
         pid.stdout.close()
         if pid.returncode != 0:
